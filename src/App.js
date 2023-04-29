@@ -7,7 +7,28 @@ import background from "./images/pattern-bg-desktop.png" ;
 
 
 function App() {
-  const[address, setAddress] = useState(null)
+  const [address, setAddress] = useState({
+    ip: "8.8.8.8",
+    location: {
+      country: "US",
+      region: "California",
+      city: "Mountain View",
+      lat: 37.38605,
+      lng: -122.08385,
+      postalCode: "94035",
+      timezone: "-07:00",
+      geonameId: 5375480,
+    },
+    domains: [
+      "21vek-dev.by",
+      "abbsmartsocieties.com",
+      "afroonet-fastjet.co.zw",
+      "amadhal.com",
+      "centralrealtiesltd.com",
+    ],
+    as: { asn: 15169, name: "GOOGLE", route: "8.8.8.0/24", domain: "https://about.google/intl/en/", type: "Content" },
+    isp: "Google LLC",
+  });
   const[ipAddress, setIpAddress] = useState("")
   const checkIpAddress =
   /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/gi
@@ -17,12 +38,14 @@ const checkDomain =
   useEffect(()=>{
     try{
       const getInitialData = async()=>{
-        // const res = await fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.REACT_APP_API_KEY}&ipAddress=192.212.174.101`)
-        const res = await fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=at_YYyZtw2S8I05ptN8Cs36j7aavMCsK&ipAddress=8.8.8.8`)
+        const res = await fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.REACT_APP_API_KEY}&ipAddress=192.212.174.101`)
+        
+
         const data = await res.json()
         setAddress(data)
-        console.log(address)
-        console.log(data)
+        console.log("address" + address)
+        console.log("data"+data)
+
       }
 
       getInitialData()
